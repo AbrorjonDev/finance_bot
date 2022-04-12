@@ -22,8 +22,9 @@ async def welcome(message:types.Message):
         'ru': f'Добро пожаловать, {first_name} {last_name}. \nВыберите язык.',
         'uz': f'Xush kelibsiz, {first_name} {last_name}. \nIltimos tilni tanlang. '
     }
-    await message.answer(
-        lang_res[lang],
+    await bot.send_message(
+        chat_id=message.chat.id,
+        text=lang_res[lang],
         reply_markup=language
         )
 
@@ -109,4 +110,5 @@ async def get_student_infos(message:types.Message):
         )
     
 
-executor.start_polling(dp)
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
