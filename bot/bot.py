@@ -5,7 +5,7 @@ import asyncio
 from keyboards import language, main_keyboard, phone_keyboard, contact, change_language
 from database import update_user_object, get_admins_contact, get_user_infos, get_user_lang, set_user_lang
 
-BOT_TOKEN = '5001994350:AAGxGPmysy27ArnBKaQlTVktcdblCPTGJCA'
+BOT_TOKEN = '1617387026:AAHOITypgcGpKp6AVLdyCMBmww0Yx8WFNhE' #'5001994350:AAGxGPmysy27ArnBKaQlTVktcdblCPTGJCA'
 bot = Bot(BOT_TOKEN)
 
 dp = Dispatcher(bot)
@@ -57,7 +57,7 @@ async def set_user_by_phone(message:types.ContentType.ANY):
     phone_number = message['contact']['phone_number']
     user_id = message.from_user.id
     contact_id = message.contact.user_id
-    if user_id == contact_id:
+    if user_id == contact_id: 
         if not phone_number.startswith('+'):
             phone_number = '+'+''.join(str(phone_number))
         user = await update_user_object(user_id=message['from']['id'], phone=phone_number)
@@ -67,7 +67,7 @@ async def set_user_by_phone(message:types.ContentType.ANY):
         else:
             await bot.send_message(message['chat']['id'], "Authentication failed!\nPlease contact with admins", reply_markup=phone_keyboard)
             for phone in await get_admins_contact():
-                await bot.send_contact(message['chat']['id'], phone_number=phone, first_name='admin')
+                await bot.send_contact(message['chat']['id'], phone_number=phone[0], first_name=phone[1])
     else:
         await bot.send_message(message['chat']['id'], "Authentication failed!\nPlease contact with admins", reply_markup=phone_keyboard)
 

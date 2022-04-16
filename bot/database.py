@@ -1,5 +1,6 @@
 import asyncio
 import psycopg2
+import datetime
 
 async def intToSTR(summa):
     if type(summa)!=int:
@@ -28,13 +29,16 @@ async def set_user_lang(user_id, lang='en'):
     conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
     if user_id:
         sql = f"""
-            SELECT bot_lang, edu_lang FROM app_students WHERE user_id = %s ;
+            SELECT edu_lang FROM app_students WHERE uid = %s ;
+        """
+        sql_lang = f"""
+            SELECT bot_lang, student_id FROM app_studentuser_ids WHERE user_id = %s ;
         """
         sql_bot = f"""
             SELECT bot_lang FROM app_tguserlang WHERE user_id = %s ;
         """
         sql_update = f"""
-            UPDATE app_students SET bot_lang = %s WHERE user_id = %s;
+            UPDATE app_studentuser_ids SET bot_lang = %s WHERE user_id = %s;
         """
 
         sql_create = f"""
@@ -42,7 +46,7 @@ async def set_user_lang(user_id, lang='en'):
         """
         curr = conn.cursor()
 
-        curr.execute(sql, (str(user_id), )) #
+        curr.execute(sql_lang, (str(user_id), )) #
         if not curr.fetchone():
 
             curr.execute(sql_bot, (str(user_id), )) #
@@ -62,28 +66,46 @@ async def get_user_lang(user_id=None, lang='en'):
     conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
 
     if user_id:
+        sql_lang = f"""
+            SELECT bot_lang, student_id FROM app_studentuser_ids WHERE user_id=%s;
+            """
         sql = f"""
-            SELECT bot_lang, edu_lang FROM app_students WHERE user_id = %s;
+            SELECT edu_lang FROM app_students WHERE id = %s;
             """
     cur = conn.cursor()
-    cur.execute(sql, (str(user_id), ))
+    cur.execute(sql_lang, (str(user_id), ))
     res = cur.fetchone()
+    if res is not None:
+        if res[0]:
+            cur.close()
+            conn.close()
+            return res[0]
+        elif res[1]:
+            cur.execute(sql, (str(res[1]), ))
+            res = cur.fetchone()
+        else:
+            cur.close()
+            conn.close()
+            return res[0] or 'en'
+    
     if res is None:
         cur.close()
         conn.close()
         return lang or 'en'
     cur.close()
     conn.close()
-    return res[0] or res[1] or lang
+    return res[0] or lang
 
-async def write_to_bot_history(id, message):
+async def write_to_bot_history(id, message, phone):
     conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
     curr = conn.cursor()
 
     sql = f"""
-        INSERT INTO app_bothistory (user_id, message) VALUES (%s, %s);
+        INSERT INTO app_bothistory (user_id, message, date_time, phone) VALUES (%s, %s, %s, %s);
     """
-    curr.execute(sql, (id, message))
+    now = datetime.datetime.now()
+    time = now.strftime("%Y-%m-%d %H:%M:%S")
+    curr.execute(sql, (str(id), message, time, phone))
     conn.commit()
     curr.close()
     conn.close()
@@ -96,17 +118,32 @@ async def user_datas(user_id, lang=None):
 
     if lang is None:
         lang='en'
+
+    sql_student = f"""
+        SELECT student_id FROM app_studentuser_ids where user_id = %s;
+        """
     sql = f"""
-        SELECT id,  id_raqam, fish, faculty,date_contracted, contract_soums, level  FROM app_students WHERE user_id = %s;
+        SELECT id,  id_raqam, fish, faculty,date_contracted, contract_soums, level  FROM app_students WHERE id = %s;
+    """
+    sql_phone = f"""
+        SELECT phone_number FROM app_studentuser_ids WHERE user_id=%s;
     """
     sql_1 = f"""
         SELECT date_paid, soums_paid FROM app_payments WHERE student_id = %s;
     """
     curr = conn.cursor()
-    curr.execute(sql, (str(user_id), ))
+    curr.execute(sql_student, (str(user_id), ))
+    student = curr.fetchone()
+    if student:
+        student_id = student[0]
+    else:
+        return None
+    curr.execute(sql, (str(student_id), ))
     student_info = curr.fetchone()
     if student_info is None:
         return None
+    curr.execute(sql_phone, (str(user_id), ))
+    phone = curr.fetchone()
     curr.execute(sql_1, (student_info[0], ))
     paid_all = 0
     must_paid = 0
@@ -117,7 +154,7 @@ async def user_datas(user_id, lang=None):
     
     curr.close()
     conn.close()
-    return student_info, payments, paid_all, must_paid
+    return student_info, payments, paid_all, must_paid, phone
     
     
 
@@ -133,7 +170,7 @@ async def set_all_payments(payments, lang=None):
     for pay in payments:
         text+=f'  {pay[0]}                               {await intToSTR(pay[1])}\n'    
     return text
-
+ 
 async def get_user_infos(user_id, lang=None):
     result_message = None
     not_found_message = '''
@@ -155,27 +192,63 @@ async def get_user_infos(user_id, lang=None):
         result_message = f'''
         ✅\nTalaba id:{user_data[0][1]}\nF.I.O: {user_data[0][2]}\nFakultet: {user_data[0][3]}\nShartnoma: {user_data[0][1]}  sana: {user_data[0][4]}\n\n\nShartnoma summasi:              {await intToSTR(user_data[0][5])}\n\nTo'lov amalga oshirildi:\n{await set_all_payments(user_data[1], lang)}\n\nTo'lov amalga oshirildi:             { await intToSTR(user_data[2])}\nTo'lanishi kerak:                          {await intToSTR(user_data[3])}
         '''
-    await write_to_bot_history(user_data[0][0], message=result_message)
+    phone=user_data[4]
+    if phone is not None:
+        phone = phone[0]
+    else:
+        phone=None
+    await write_to_bot_history(user_data[0][0], message=result_message, phone=phone)
     return result_message or not_found_message
 
 
 
 
 
-async def update_user_object(user_id, phone):
+async def update_user_object(user_id, phone, user=None):
     conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    sql_phone = f"""
+        SELECT student_id, phone_number, bot_used, user_id FROM app_studentuser_ids WHERE phone_number=%s;
+    """
+    
     sql_getting = f"""
-        SELECT fish FROM app_students WHERE phone_number=%s;
+        SELECT fish, id FROM app_students WHERE id=%s;
         """
     sql = f"""
-        UPDATE app_students SET bot_used=%s , user_id=%s where phone_number=%s;
+        UPDATE app_studentuser_ids SET bot_used=%s , user_id=%s where id=%s;
         """
+    sql_user_id = f"""
+        UPDATE app_studentuser_ids SET bot_used=%s , user_id=%s where phone_number=%s and student_id=%s;
+    """
     cur = conn.cursor()
+    # phone = f"%{phone}%"
+    cur.execute(sql_phone, (phone, ))
+    student = cur.fetchone()
+    print("Student: ", student)
+    if student:
+        if student[3] is None:
+            cur.execute(sql_user_id, (True, str(user_id), phone, student[0]))
+            conn.commit()
 
-    cur.execute(sql_getting, (phone,))
-    user = cur.fetchone()
-    cur.execute(sql, (True, str(user_id), phone))
-    conn.commit()
+            cur.execute(sql, (True, str(user_id), student[0]))
+            conn.commit()
+            cur.execute(sql_getting, (student[0],))
+            user = cur.fetchone()
+            print("User obj: ", user)
+        elif student[3] == str(user_id):
+            cur.execute(sql_getting, (student[0],))
+            user = cur.fetchone()
+            print("User obj: ", user)
+        else:
+            return None
+        # cur.execute(sql_getting, (phone,))
+        # user = cur.fetchone()
+    # if user is None:
+    #     return user
+    # if user.user_id in ['', None]:
+    #     cur.execute(sql, (True, str(user_id), phone))
+    # else:
+    #     cur.execute(sql, (True, user.user_id+str(user_id), phone))
+    # conn.commit()
     conn.close()
     if user is not None:
         return user[0]
@@ -190,6 +263,7 @@ async def get_admins_contact():
     curr = conn.cursor()
     curr.execute(sql)
     res = curr.fetchall()
+    print(res)
     return res
 
 #######SYNCRONICALLY
@@ -233,9 +307,9 @@ def sync_write_to_bot_history(id, message):
     curr = conn.cursor()
 
     sql = f"""
-        INSERT INTO app_bothistory (user_id, message) VALUES (%s, %s);
+        INSERT INTO app_bothistory (user_id, message, date_time) VALUES (%s, %s, %s);
     """
-    curr.execute(sql, (id, message))
+    curr.execute(sql, (str(id), message, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
     conn.commit()
     curr.close()
     conn.close()
@@ -243,22 +317,37 @@ def sync_write_to_bot_history(id, message):
 
 
 
-def get_user_datas(user_id, lang=None):
+def get_user_datas(id, lang=None):
     conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
 
     if lang is None:
         lang='en'
+
     sql = f"""
-        SELECT id,  id_raqam, fish, faculty,date_contracted, contract_soums, level  FROM app_students WHERE user_id = %s;
+        SELECT id,  id_raqam, fish, faculty, date_contracted, contract_soums, level  FROM app_students WHERE id = %s;
+    """
+    sql_phone = f"""
+        SELECT phone_number, user_id FROM app_studentuser_ids WHERE student_id=%s;
     """
     sql_1 = f"""
         SELECT date_paid, soums_paid FROM app_payments WHERE student_id = %s;
     """
     curr = conn.cursor()
-    curr.execute(sql, (str(user_id), ))
+    curr.execute(sql, (str(id), ))
+    student_info = curr.fetchone()
+    if student_info is None:
+        curr.close()
+        conn.close()
+        return None
+        
+    curr.execute(sql, (str(id), ))
     student_info = curr.fetchone()
     if student_info is None:
         return None
+
+
+    curr.execute(sql_phone, (str(id), ))
+    phone = curr.fetchone()
     curr.execute(sql_1, (student_info[0], ))
     paid_all = 0
     must_paid = 0
@@ -267,18 +356,17 @@ def get_user_datas(user_id, lang=None):
         paid_all += res[1]
     must_paid = student_info[5]-paid_all
     
-    print("payments: ",payments)
     curr.close()
     conn.close()
-    return student_info, payments, paid_all, must_paid
+    return student_info, payments, paid_all, must_paid, phone
 
 
-def get_user_infos_by_bot(user_id, lang=None):
+def get_user_infos_by_bot(id, lang=None):
     result_message = None
     not_found_message = '''
         ❌\nNot found your infos.
     '''
-    user_data = get_user_datas(user_id=user_id, lang=lang)
+    user_data = get_user_datas(id=id, lang=lang)
     if not user_data:
         return None
     if lang == 'ru':

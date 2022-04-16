@@ -1,55 +1,5 @@
-{
-    "id": "1985118803846523144",
-    "from": {
-        "id": 462196488,
-        "is_bot": false,
-        "first_name": "𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗",
-        "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-        "username": "AbrorjonAxmadov",
-        "language_code": "en"
-    },
-    "message": {
-        "message_id": 3241,
-        "from": {
-            "id": 5001994350,
-            "is_bot": true,
-            "first_name": "TIUE_contract_check",
-            "username": "TIUE_contract_check_bot"
-        },
-        "chat": {
-            "id": 462196488,
-            "first_name": "𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗",
-            "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-            "username": "AbrorjonAxmadov",
-            "type": "private"
-        },
-        "date": 1649208413,
-        "text": "Welcome,𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗 𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-        "reply_markup": {
-            "inline_keyboard": [
-                [
-                    {
-                        "text": "English",
-                        "callback_data": "en"
-                    },
-                    {
-                        "text": "Russian",
-                        "callback_data": "ru"
-                    },
-                    {
-                        "text": "Uzbek",
-                        "callback_data": "uz"
-                    }
-                ]
-            ]
-        }
-    },
-    "chat_instance": "5877242919197653088",
-    "data": "uz"
-}
-
-{
-    "message_id": 3293,
+{"Message": {
+    "message_id": 1574,
     "from": {
         "id": 462196488,
         "is_bot": false,
@@ -65,14 +15,14 @@
         "username": "AbrorjonAxmadov",
         "type": "private"
     },
-    "date": 1649210465,
+    "date": 1649843683,
     "reply_to_message": {
-        "message_id": 3292,
+        "message_id": 1573,
         "from": {
-            "id": 5001994350,
+            "id": 1617387026,
             "is_bot": true,
-            "first_name": "TIUE_contract_check",
-            "username": "TIUE_contract_check_bot"
+            "first_name": "EVOS Order",
+            "username": "evos_order_bot"
         },
         "chat": {
             "id": 462196488,
@@ -81,8 +31,8 @@
             "username": "AbrorjonAxmadov",
             "type": "private"
         },
-        "date": 1649210462,
-        "text": "Language has been set to English.\n The bot requires to get your infos for authenticating you."
+        "date": 1649843679,
+        "text": "Поделитесь своим номером телефона, чтобы бот мог вас узнать."
     },
     "contact": {
         "phone_number": "+998971661186",
@@ -90,11 +40,13 @@
         "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
         "user_id": 462196488
     }
-}
+},
 
 
-{
-    "message_id": 3301,
+
+
+"Message": {
+    "message_id": 1576,
     "from": {
         "id": 462196488,
         "is_bot": false,
@@ -110,79 +62,11 @@
         "username": "AbrorjonAxmadov",
         "type": "private"
     },
-    "date": 1649211319,
-    "reply_to_message": {
-        "message_id": 3298,
-        "from": {
-            "id": 5001994350,
-            "is_bot": true,
-            "first_name": "TIUE_contract_check",
-            "username": "TIUE_contract_check_bot"
-        },
-        "chat": {
-            "id": 462196488,
-            "first_name": "𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗",
-            "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-            "username": "AbrorjonAxmadov",
-            "type": "private"
-        },
-        "date": 1649210877,
-        "text": "contact sharing has been finished.."
-    },
+    "date": 1649843734,
     "contact": {
-        "phone_number": "+998971661186",
-        "first_name": "𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗",
-        "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-        "user_id": 462196488
+        "phone_number": "+998982617779",
+        "first_name": "+998982617779",
+        "vcard": "BEGIN:VCARD\nVERSION:3.0\nFN:+998982617779\nTEL;MOBILE:+998982617779\nEND:VCARD",
+        "user_id": 601377530
     }
-}
-// ##############################################
-{
-    "id": "1985118803093264480",
-    "from": {
-        "id": 462196488,
-        "is_bot": false,
-        "first_name": "𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗",
-        "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-        "username": "AbrorjonAxmadov",
-        "language_code": "en"
-    },
-    "message": {
-        "message_id": 3591,
-        "from": {
-            "id": 5001994350,
-            "is_bot": true,
-            "first_name": "TIUE_contract_check",
-            "username": "TIUE_contract_check_bot"
-        },
-        "chat": {
-            "id": 462196488,
-            "first_name": "𝙰𝚋𝚛𝚘𝚛𝚓𝚘𝚗",
-            "last_name": "𝙰𝚡𝚖𝚊𝚍𝚘𝚟",
-            "username": "AbrorjonAxmadov",
-            "type": "private"
-        },
-        "date": 1649355763,
-        "text": "Please choose your language.",
-        "reply_markup": {
-            "inline_keyboard": [
-                [
-                    {
-                        "text": "English",
-                        "callback_data": "change_en"
-                    },
-                    {
-                        "text": "Russian",
-                        "callback_data": "change_ru"
-                    },
-                    {
-                        "text": "Uzbek",
-                        "callback_data": "change_uz"
-                    }
-                ]
-            ]
-        }
-    },
-    "chat_instance": "5877242919197653088",
-    "data": "change_uz"}
-
+}}

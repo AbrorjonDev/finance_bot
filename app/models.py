@@ -1,7 +1,7 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth import get_user_model
-
+from datetime import datetime
 User = get_user_model()
 
 class Documents(models.Model):
@@ -41,16 +41,20 @@ class Students(models.Model):
     paid_percentage = models.FloatField(null=True, blank=True)
 
     #tg user data
-    phone_number = models.CharField(max_length=40, help_text='+998971661186', null=True, blank=True)
-    user_id = models.CharField(max_length=30, null=True, blank=True)
-    bot_lang = models.CharField(max_length=3, choices=LANGUAGES, null=True, blank=True)
+    # phone_number = models.CharField(max_length=500, help_text='+998971661186,+998971661186,+998971661186', null=True, blank=True),
+        
+    
+    
+    
     bot_used = models.BooleanField(default=False, verbose_name='Он использует бота?')
 
     @property
     def all_paid(self):
         payments = self.payments_set.all()
         return sum([payment.soums_paid for payment in payments])
-        
+    @property
+    def phones(self):
+        return self.studentuser_ids_set.all() 
     @property
     def remains_year_end(self):
         return self.contract_soums - self.all_paid
@@ -79,6 +83,8 @@ class BotHistory(models.Model):
 
     user = models.ForeignKey(Students, on_delete=models.CASCADE)
     message = models.TextField(null=True, blank=True)
+    date_time = models.DateTimeField(auto_now_add=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
 
     class Meta:
         ordering = ('-id',)
@@ -86,6 +92,10 @@ class BotHistory(models.Model):
     def __str__(self):
         return self.user.fish
 
+    def save(self, *args, **kwargs):
+        if not self.date_time:
+            self.date_time = datetime.now()
+        return super(BotHistory, self).save(*args, **kwargs)
 
 
 class TgUserLang(models.Model):
@@ -101,3 +111,40 @@ class Admins(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.first_name or self.phone_number
+
+
+class BotMessages(models.Model):
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    students = models.ManyToManyField(Students, null=True, blank=True)
+
+    def __str__(self):
+       return str(self.id)   #self.admin.username or 
+        
+        
+
+class MessagesByStudents(models.Model):
+    student = models.ForeignKey(Students, on_delete=models.CASCADE)
+    message = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.student.fish
+
+class StudentUser_ids(models.Model):
+    LANGUAGES = (('en','en'), ('ru', 'ru'), ('uz', 'uz'))
+
+    student = models.ForeignKey(Students, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=100, null=True, blank=True)
+    bot_lang = models.CharField(max_length=3, choices=LANGUAGES, null=True, blank=True)
+    phone_number = models.CharField(max_length=100)
+    bot_used = models.BooleanField(default=False, verbose_name='Он(a) использует бота?')
+
+    class Meta:
+        verbose_name = 'Phone Number'
+        verbose_name_plural = 'Phone Numbers'
+
+    def __str__(self):
+        return self.student.fish
