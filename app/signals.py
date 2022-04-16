@@ -4,7 +4,7 @@ from django.contrib import messages
 import requests
 from openpyxl import Workbook, load_workbook
  
-
+from django.conf import settings
  
 
 #local imports
@@ -65,7 +65,7 @@ def send_admin_message_to_students(sender, created, instance, *args, **kwargs):
         print("Students: ", instance.students.all())
         for std in instance.students.all():
             for phone in std.phones.all():
-                r = requests.get('https://api.telegram.org/bot1617387026:AAHOITypgcGpKp6AVLdyCMBmww0Yx8WFNhE/sendMessage',
+                r = requests.get(f'https://api.telegram.org/bot{settings.BOT_TOKEN}/sendMessage',
                 params = {'chat_id':phone.user_id, 'text':instance.message}
                 )
                 print("request code: ", r.status_code)

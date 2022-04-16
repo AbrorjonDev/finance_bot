@@ -23,10 +23,12 @@ async def intToSTR(summa):
     return summa_str
 
 
-
+DATABASE = 'tiue_bot'
+USER = 'admin'
+PASSWORD = 'testing321'
 
 async def set_user_lang(user_id, lang='en'):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
     if user_id:
         sql = f"""
             SELECT edu_lang FROM app_students WHERE uid = %s ;
@@ -63,7 +65,7 @@ async def set_user_lang(user_id, lang='en'):
 
 
 async def get_user_lang(user_id=None, lang='en'):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
 
     if user_id:
         sql_lang = f"""
@@ -97,7 +99,7 @@ async def get_user_lang(user_id=None, lang='en'):
     return res[0] or lang
 
 async def write_to_bot_history(id, message, phone):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
     curr = conn.cursor()
 
     sql = f"""
@@ -114,7 +116,7 @@ async def write_to_bot_history(id, message, phone):
 
 
 async def user_datas(user_id, lang=None):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
 
     if lang is None:
         lang='en'
@@ -205,7 +207,7 @@ async def get_user_infos(user_id, lang=None):
 
 
 async def update_user_object(user_id, phone, user=None):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
     sql_phone = f"""
         SELECT student_id, phone_number, bot_used, user_id FROM app_studentuser_ids WHERE phone_number=%s;
     """
@@ -255,7 +257,7 @@ async def update_user_object(user_id, phone, user=None):
     return user
     
 async def get_admins_contact():
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
     admins = []
     sql = f"""
         SELECT phone_number, first_name FROM app_admins;
@@ -303,7 +305,7 @@ def get_all_payments(payments, lang=None):
 
 
 def sync_write_to_bot_history(id, message):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
     curr = conn.cursor()
 
     sql = f"""
@@ -318,7 +320,7 @@ def sync_write_to_bot_history(id, message):
 
 
 def get_user_datas(id, lang=None):
-    conn = psycopg2.connect(database='tiue_bot', user='admin', password='testing321')
+    conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
 
     if lang is None:
         lang='en'

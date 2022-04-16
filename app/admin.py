@@ -19,7 +19,7 @@ def sending_remains(modeladmin, request, queryset):
             lang = phone.bot_lang or obj.edu_lang
             message = get_user_infos_by_bot(id=user_id, lang=lang)
             if message is not None:
-                r = requests.get('https://api.telegram.org/bot1617387026:AAHOITypgcGpKp6AVLdyCMBmww0Yx8WFNhE/sendMessage',
+                r = requests.get(f'https://api.telegram.org/bot{settings.BOT_TOKEN}/sendMessage',
                     params = {'chat_id':phone.user_id, 'text':message}
                     )
                 if r.status_code == 200:
