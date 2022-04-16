@@ -5,7 +5,7 @@ import asyncio
 from keyboards import language, main_keyboard, phone_keyboard, contact, change_language
 from database import update_user_object, get_admins_contact, get_user_infos, get_user_lang, set_user_lang
 
-BOT_TOKEN = '1617387026:AAHOITypgcGpKp6AVLdyCMBmww0Yx8WFNhE' #'5001994350:AAGxGPmysy27ArnBKaQlTVktcdblCPTGJCA'
+BOT_TOKEN = '5298757841:AAFdQVWMzbBqXNWA7qNC_RcIk_D2XOrh1nI'
 bot = Bot(BOT_TOKEN)
 
 dp = Dispatcher(bot)

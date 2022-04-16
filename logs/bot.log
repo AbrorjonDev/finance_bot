@@ -1,0 +1,296 @@
+Updates were skipped successfully.
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Goodbye!
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/bot/bot.py", line 114, in <module>
+    executor.start_polling(dp, skip_updates=True)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 320, in start_polling
+    loop.run_until_complete(self._startup_polling())
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 372, in _startup_polling
+    await self._welcome()
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/executor.py", line 361, in _welcome
+    user = await self.dispatcher.bot.me
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 30, in me
+    setattr(self, '_me', await self.get_me())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 228, in get_me
+    result = await self.request(api.Methods.GET_ME, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 121, in check_result
+    exceptions.Unauthorized.detect(description)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+aiogram.utils.exceptions.Unauthorized: Unauthorized
+Updates were skipped successfully.
+Task exception was never retrieved
+future: <Task finished name='Task-9' coro=<Dispatcher._process_polling_updates() done, defined at /home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py:407> exception=UndefinedTable('relation "app_studentuser_ids" does not exist\nLINE 2:             SELECT bot_lang, student_id FROM app_studentuser...\n                                                     ^\n')>
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/bot/bot.py", line 94, in get_student_infos
+    lang = await get_user_lang(user_id=message['from']['id'], )
+  File "/home/it_tower/finbot/bot/database.py", line 78, in get_user_lang
+    cur.execute(sql_lang, (str(user_id), ))
+psycopg2.errors.UndefinedTable: relation "app_studentuser_ids" does not exist
+LINE 2:             SELECT bot_lang, student_id FROM app_studentuser...
+                                                     ^
+
+Updates were skipped successfully.
+Task exception was never retrieved
+future: <Task finished name='Task-9' coro=<Dispatcher._process_polling_updates() done, defined at /home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py:407> exception=UndefinedTable('relation "app_studentuser_ids" does not exist\nLINE 2:             SELECT bot_lang, student_id FROM app_studentuser...\n                                                     ^\n')>
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/bot/bot.py", line 94, in get_student_infos
+    lang = await get_user_lang(user_id=message['from']['id'], )
+  File "/home/it_tower/finbot/bot/database.py", line 78, in get_user_lang
+    cur.execute(sql_lang, (str(user_id), ))
+psycopg2.errors.UndefinedTable: relation "app_studentuser_ids" does not exist
+LINE 2:             SELECT bot_lang, student_id FROM app_studentuser...
+                                                     ^
+
+Task exception was never retrieved
+future: <Task finished name='Task-12' coro=<Dispatcher._process_polling_updates() done, defined at /home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py:407> exception=UndefinedTable('relation "app_studentuser_ids" does not exist\nLINE 2: ... student_id, phone_number, bot_used, user_id FROM app_studen...\n                                                             ^\n')>
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/bot/bot.py", line 63, in set_user_by_phone
+    user = await update_user_object(user_id=message['from']['id'], phone=phone_number)
+  File "/home/it_tower/finbot/bot/database.py", line 226, in update_user_object
+    cur.execute(sql_phone, (phone, ))
+psycopg2.errors.UndefinedTable: relation "app_studentuser_ids" does not exist
+LINE 2: ... student_id, phone_number, bot_used, user_id FROM app_studen...
+                                                             ^
+
+Updates were skipped successfully.
+Cause exception while getting updates.
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/base.py", line 231, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 128, in check_result
+    raise exceptions.TelegramAPIError(description)
+aiogram.utils.exceptions.TelegramAPIError: Bad Gateway
