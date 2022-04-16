@@ -2,6 +2,10 @@ import asyncio
 import psycopg2
 import datetime
 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 async def intToSTR(summa):
     if type(summa)!=int:
         return summa
@@ -23,9 +27,9 @@ async def intToSTR(summa):
     return summa_str
 
 
-DATABASE = 'tiue_bot'
-USER = 'admin'
-PASSWORD = 'testing321'
+DATABASE = os.getenv('DATABASE')
+USER = os.getenv('USER_DB')
+PASSWORD = os.getenv('PASSWORD')
 
 async def set_user_lang(user_id, lang='en'):
     conn = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD)
@@ -225,7 +229,6 @@ async def update_user_object(user_id, phone, user=None):
     # phone = f"%{phone}%"
     cur.execute(sql_phone, (phone, ))
     student = cur.fetchone()
-    print("Student: ", student)
     if student:
         if student[3] is None:
             cur.execute(sql_user_id, (True, str(user_id), phone, student[0]))
@@ -235,11 +238,9 @@ async def update_user_object(user_id, phone, user=None):
             conn.commit()
             cur.execute(sql_getting, (student[0],))
             user = cur.fetchone()
-            print("User obj: ", user)
         elif student[3] == str(user_id):
             cur.execute(sql_getting, (student[0],))
             user = cur.fetchone()
-            print("User obj: ", user)
         else:
             return None
         # cur.execute(sql_getting, (phone,))
@@ -265,7 +266,6 @@ async def get_admins_contact():
     curr = conn.cursor()
     curr.execute(sql)
     res = curr.fetchall()
-    print(res)
     return res
 
 #######SYNCRONICALLY

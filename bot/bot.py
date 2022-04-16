@@ -1,11 +1,17 @@
 from aiogram import Dispatcher, Bot, executor, types
 import asyncio
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 #local imports
 from keyboards import language, main_keyboard, phone_keyboard, contact, change_language
 from database import update_user_object, get_admins_contact, get_user_infos, get_user_lang, set_user_lang
 
+<<<<<<< HEAD
 BOT_TOKEN = '5298757841:AAFdQVWMzbBqXNWA7qNC_RcIk_D2XOrh1nI'
+=======
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+>>>>>>> 24e0972904d220bd09a0cfb7fd9e2908ad116008
 bot = Bot(BOT_TOKEN)
 
 dp = Dispatcher(bot)
