@@ -6,12 +6,11 @@ admin.site.site_header = 'TIUE FINANCE ADMIN'
 admin.site.site_title = 'TIUE FINANCE'
 from django.conf import settings
 
-# admin.site.disable_action('delete_selected')
+admin.site.disable_action('delete_selected')
 @admin.action(description="Отправка остатков от бота на студенческие аккаунты")
 def sending_remains(modeladmin, request, queryset):
     counter = 0
     all_obj = 0
-    # all_obj = queryset.count()
     for obj in queryset:
         user_id=obj.id or None
         phones = obj.phones
@@ -68,7 +67,7 @@ class StudentsAdmin(admin.ModelAdmin):
         StudentUser_idsInlines
     ]
 
-    actions = ['delete_selected', sending_remains]
+    actions = [sending_remains]
 
 
 
@@ -95,7 +94,7 @@ class BotHistoryAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'date_time')
     search_fields = ('user', 'phone')
     readonly_fields = ('date_time', 'phone', 'user')
-
+    date_hierarchy = 'date_time'
     fieldsets = (
         ('', {
             'fields':('user', 'phone'),
@@ -122,8 +121,8 @@ class BotMessageAdmin(admin.ModelAdmin):
     list_display = ('admin', 'date_created')
     search_fields = ('admin__username',)
     filter_horizontal = ('students',)
-    readonly_fields = ('date_created', 'date_updated',)
-
+    readonly_fields = ('admin', 'date_created', 'date_updated',)
+    date_hierarchy = 'date_created'
     fieldsets = (
         ('', {
         'fields':('message', 'admin',)

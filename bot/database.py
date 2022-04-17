@@ -11,10 +11,8 @@ async def intToSTR(summa):
         return summa
     summa_str = str(summa)
     indexi = 0
-    for i in range(len(summa_str)):
-        if summa_str[i]=='-':
-            indexi = i
-            summa_str = summa_str[i+1:]
+    if summa_str.startswith('-'):
+        summa_str = summa_str[1:]
     counter=0
     for i in range(len(summa_str), 0, -1):
 
@@ -222,11 +220,13 @@ async def update_user_object(user_id, phone, user=None):
     sql = f"""
         UPDATE app_studentuser_ids SET bot_used=%s , user_id=%s where id=%s;
         """
+    sql_student = f"""
+        UPDATE app_students SET bot_used=%s where id=%s;
+        """
     sql_user_id = f"""
         UPDATE app_studentuser_ids SET bot_used=%s , user_id=%s where phone_number=%s and student_id=%s;
     """
     cur = conn.cursor()
-    # phone = f"%{phone}%"
     cur.execute(sql_phone, (phone, ))
     student = cur.fetchone()
     if student:
@@ -238,20 +238,16 @@ async def update_user_object(user_id, phone, user=None):
             conn.commit()
             cur.execute(sql_getting, (student[0],))
             user = cur.fetchone()
+            cur.execute(sql_student, (True, user[1],))
+            conn.commit()
         elif student[3] == str(user_id):
             cur.execute(sql_getting, (student[0],))
             user = cur.fetchone()
+            cur.execute(sql_student, (True, user[1],))
+            conn.commit()
         else:
             return None
-        # cur.execute(sql_getting, (phone,))
-        # user = cur.fetchone()
-    # if user is None:
-    #     return user
-    # if user.user_id in ['', None]:
-    #     cur.execute(sql, (True, str(user_id), phone))
-    # else:
-    #     cur.execute(sql, (True, user.user_id+str(user_id), phone))
-    # conn.commit()
+        
     conn.close()
     if user is not None:
         return user[0]
@@ -276,13 +272,10 @@ def get_intToSTR(summa):
         return summa
     summa_str = str(summa)
     indexi = 0
-    for i in range(len(summa_str)):
-        if summa_str[i]=='-':
-            indexi = i
-            summa_str = summa_str[i+1:]
+    if summa_str.startswith('-'):
+        summa_str = summa_str[1:]
     counter=0
     for i in range(len(summa_str), 0, -1):
-
         if counter>2:
             summa_str = summa_str[0:i]+','+summa_str[i:]
             counter=0
