@@ -4,9 +4,9 @@ import requests
 from bot.database import get_user_infos_by_bot
 admin.site.site_header = 'TIUE FINANCE ADMIN'
 admin.site.site_title = 'TIUE FINANCE'
+from django.conf import settings
 
-
-admin.site.disable_action('delete_selected')
+# admin.site.disable_action('delete_selected')
 @admin.action(description="Отправка остатков от бота на студенческие аккаунты")
 def sending_remains(modeladmin, request, queryset):
     counter = 0
@@ -139,6 +139,9 @@ class BotMessageAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.admin = request.user
-        return super(BotMessageAdmin, self).save_model(request, obj, form, change)
+        super(BotMessageAdmin, self).save_model(request, obj, form, change)
+        obj.save()
+        messages.add_message(request, messages.SUCCESS, f'Сообщение было отправлено студентам.')
+        return obj
 
 admin.site.register(StudentUser_ids)

@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, m2m_changed
 from django.dispatch import receiver
 from django.contrib import messages
 import requests
@@ -8,7 +8,7 @@ from django.conf import settings
  
 
 #local imports
-from .models import Documents, Students, Payments, BotMessages
+from .models import Documents, Students, Payments, BotMessages, StudentUser_ids
 
 
 @receiver(post_save, sender=Documents)
@@ -50,28 +50,40 @@ def create_document(sender, instance, created, *args, **kwargs):
                     soums_paid=int(pay) or ws.cell(j, 11).value
                     )
                     phone_number=ws.cell(i, 15).value
-                    StudentUser_ids.objects.get_or_create(student=student, phone=phone_number)
+                    if phone_number:
+                        StudentUser_ids.objects.get_or_create(student=student, phone_number=phone_number)
                     j+=1
                 i=j            
             else:
                 continue
 
 
-
-@receiver(post_save, sender=BotMessages)
-def send_admin_message_to_students(sender, created, instance, *args, **kwargs):
-    if created:
-        all_obj, counter = 0, 0 
-        print("Students: ", instance.students.all())
+@receiver(m2m_changed, sender=BotMessages.students.through)
+def bot_message_created(sender, **kwargs):
+    instance = kwargs.pop('instance', None)
+    students = kwargs.pop('students', None)
+    message = kwargs.pop('message', None)
+    admin = kwargs.pop('admin', None)
+    action = kwargs.pop('action', None)
+    instance.save()
+    if action == 'post_add':
+        counter, all_obj = 0, 0
         for std in instance.students.all():
             for phone in std.phones.all():
                 r = requests.get(f'https://api.telegram.org/bot{settings.BOT_TOKEN}/sendMessage',
                 params = {'chat_id':phone.user_id, 'text':instance.message}
                 )
-                print("request code: ", r.status_code)
                 if r.status_code == 200:
                     counter += 1
                 all_obj += 1
+    return instance
+
+
+# @receiver(post_save, sender=BotMessages)
+# def send_admin_message_to_students(sender, created, instance, *args, **kwargs):
+#     all_obj, counter = 0, 0 
+
+    
     
         # messages.add_message(request, messages.WARNING, f'Не отправлено сообщение {all_obj-counter} из {all_obj} студентов')
         # messages.add_message(request, messages.INFO, f'Отправлено сообщение {counter} из {all_obj} студентов')

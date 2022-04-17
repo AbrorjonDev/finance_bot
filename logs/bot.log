@@ -294,3 +294,47 @@ Traceback (most recent call last):
   File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/bot/api.py", line 128, in check_result
     raise exceptions.TelegramAPIError(description)
 aiogram.utils.exceptions.TelegramAPIError: Bad Gateway
+Task exception was never retrieved
+future: <Task finished name='Task-2261' coro=<Dispatcher._process_polling_updates() done, defined at /home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py:407> exception=IndexError('string index out of range')>
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/bot/bot.py", line 98, in get_student_infos
+    if message["text"] == "Infos":
+  File "/home/it_tower/finbot/bot/database.py", line 191, in get_user_infos
+    '''
+  File "/home/it_tower/finbot/bot/database.py", line 173, in set_all_payments
+    return 'To\'lovlar yo\'q..'
+  File "/home/it_tower/finbot/bot/database.py", line 11, in intToSTR
+    return summa
+IndexError: string index out of range
+Task exception was never retrieved
+future: <Task finished name='Task-2265' coro=<Dispatcher._process_polling_updates() done, defined at /home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py:407> exception=IndexError('string index out of range')>
+Traceback (most recent call last):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+  File "/home/it_tower/finbot/venv/lib/python3.9/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "/home/it_tower/finbot/bot/bot.py", line 98, in get_student_infos
+    if message["text"] == "Infos":
+  File "/home/it_tower/finbot/bot/database.py", line 191, in get_user_infos
+    '''
+  File "/home/it_tower/finbot/bot/database.py", line 173, in set_all_payments
+    return 'To\'lovlar yo\'q..'
+  File "/home/it_tower/finbot/bot/database.py", line 11, in intToSTR
+    return summa
+IndexError: string index out of range

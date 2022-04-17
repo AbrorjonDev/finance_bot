@@ -41,11 +41,6 @@ class Students(models.Model):
     paid_percentage = models.FloatField(null=True, blank=True)
 
     #tg user data
-    # phone_number = models.CharField(max_length=500, help_text='+998971661186,+998971661186,+998971661186', null=True, blank=True),
-        
-    
-    
-    
     bot_used = models.BooleanField(default=False, verbose_name='Он использует бота?')
 
     @property
@@ -122,7 +117,18 @@ class BotMessages(models.Model):
 
     def __str__(self):
        return str(self.id)   #self.admin.username or 
-        
+    
+    @property
+    def sent_messages(self):
+        if self.students.all().count()>0:
+            return self.students.filter(bot_used=True).count()
+        else:
+            return 10
+
+    def save(self, *args, **kwargs):
+        super(BotMessages, self).save(*args, **kwargs)
+
+
         
 
 class MessagesByStudents(models.Model):
@@ -148,3 +154,4 @@ class StudentUser_ids(models.Model):
 
     def __str__(self):
         return self.student.fish
+

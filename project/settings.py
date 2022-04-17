@@ -26,7 +26,7 @@ BOT_TOKEN = config('BOT_TOKEN')
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = ['https://tiue.abrorjonaxmadov.uz']
 
 # Application definition
 
