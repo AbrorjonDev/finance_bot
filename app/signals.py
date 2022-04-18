@@ -18,6 +18,7 @@ def create_document(sender, instance, created, *args, **kwargs):
         wb = wb1['IFP']
         ws = wb1.active
         counter = 0
+        Payments.objects.all().delete()
         for i in range(4, ws.max_row + 1):
             if ws.cell(i, 2).value =='ЖАМИ':
                 break
