@@ -33,6 +33,8 @@ class StudentUser_idsInlines(admin.TabularInline):
     model = StudentUser_ids
     extra = 0
     can_delete = False
+    fields = ['phone_number', 'bot_used']
+    readonly_fields = ('bot_used', )
 
 
 class PaymentsInline(admin.TabularInline):
@@ -73,6 +75,7 @@ class StudentsAdmin(admin.ModelAdmin):
 
 @admin.register(Documents)
 class DocumentsAdmin(admin.ModelAdmin):
+    list_display = ('document', 'by_admin')
     fieldsets = (
         ('FILE', {
             'fields':('document', 'by_admin'),

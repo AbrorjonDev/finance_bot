@@ -5,6 +5,8 @@ import requests
 from openpyxl import Workbook, load_workbook
  
 from django.conf import settings
+
+from bot.keyboards import Phone
  
 
 #local imports
@@ -14,6 +16,7 @@ from .models import Documents, Students, Payments, BotMessages, StudentUser_ids
 @receiver(post_save, sender=Documents)
 def create_document(sender, instance, created, *args, **kwargs):
     if created:
+        Payments.objects.all().delete()
         wb1 = load_workbook(instance.document)
         wb = wb1['IFP']
         ws = wb1.active
@@ -45,14 +48,26 @@ def create_document(sender, instance, created, *args, **kwargs):
                         payment = ws.cell(j, 11).value
                         payment = payment.replace("=", "").split('+')
                         pay = sum(int(pym) for pym in payment)
-                    payment, created = Payments.objects.get_or_create(
-                    student=student,
-                    date_paid=ws.cell(j, 10).value,
-                    soums_paid=int(pay) or ws.cell(j, 11).value
-                    )
+                    try:
+                        payment, created = Payments.objects.get_or_create(
+                            student=student,
+                            date_paid=ws.cell(j, 10).value,
+                            soums_paid=int(pay) or ws.cell(j, 11).value
+                        )
+                    except Exception as e:
+                        print(f"Error occured: {e}")
+
                     phone_number=ws.cell(i, 15).value
+                    print("tel nomeri: ", phone_number)
                     if phone_number:
-                        StudentUser_ids.objects.get_or_create(student=student, phone_number=phone_number)
+                        try:
+                            if '+' not in str(phone_number):
+                                phone_number = '+'+str(phone_number)
+                            if str(phone_number).lower() != 'cancelled': 
+                                StudentUser_ids.objects.get_or_create(student=student, phone_number=phone_number)
+                        except Exception as e:
+                            print(f"Error occured: {e}")
+
                     j+=1
                 i=j            
             else:

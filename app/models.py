@@ -154,4 +154,3 @@ class StudentUser_ids(models.Model):
 
     def __str__(self):
         return self.student.fish
-

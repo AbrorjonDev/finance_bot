@@ -59,7 +59,7 @@ async def set_user_lang(user_id, lang='en'):
         else:
             curr.execute(sql_update, (lang, str(user_id))) #
         conn.commit()
-
+        
     curr.close()   
     conn.close()
     return lang
@@ -246,6 +246,8 @@ async def update_user_object(user_id, phone, user=None):
             cur.execute(sql_student, (True, user[1],))
             conn.commit()
         else:
+            cur.close()
+            conn.close()
             return None
         
     conn.close()
